@@ -1,5 +1,10 @@
 
 class Personnage{
+
+	public static int random(int min, int max){
+		return (int) (Math.random()*(max-min+1)+min);
+	}
+
   private String nom;
   private Informations etatInitial;
   private Informations etatActuel;
@@ -24,7 +29,7 @@ class Personnage{
 	// La formule donné dans le tp a un problème 
 	// dans le cas ou forceAttaquant == forceDefenseur, n = 1 et n/2 = 0
   public void attaque(Personnage def){
-    int n = Util.random(
+    int n = random(
 				1, 
 				Math.max(1, etatActuel.getForce() - def.getEtatActuel().getForce()));
 		if(def.getEtatActuel().getAgilite() < etatActuel.getAgilite()){

@@ -1,4 +1,4 @@
-class Ex3{
+class Shift{
   
   public static int check(char[] t, char c){
     for(int i = 0; i<t.length; i++){

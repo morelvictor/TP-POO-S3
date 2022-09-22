@@ -4,11 +4,8 @@ Combat.class: combat.java Informations.class Personnage.class
 Informations.class: informations.java
 	javac informations.java
 
-Personnage.class: personnage.java Util.class
+Personnage.class: personnage.java
 	javac personnage.java
-
-Util.class: util.java
-	javac util.java
 
 run: Combat.class
 	java Combat
