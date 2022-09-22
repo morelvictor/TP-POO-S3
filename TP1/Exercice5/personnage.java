@@ -1,4 +1,5 @@
 
+
 class Personnage{
   private String nom;
   private Informations etatInitial;
@@ -16,30 +17,22 @@ class Personnage{
 
   public boolean estVivant(){ return etatActuel.getVitalite() > 0; }
   public void rebirth(){ etatActuel.setVitalite(etatInitial.getVitalite()); }
-
-	public String toString(){
-		return nom + ":\n" + etatActuel;
-	}
-
-	// La formule donné dans le tp a un problème 
-	// dans le cas ou forceAttaquant == forceDefenseur, n = 1 et n/2 = 0
+  
   public void attaque(Personnage def){
-    int n = Util.random(
-				1, 
-				Math.max(1, etatActuel.getForce() - def.getEtatActuel().getForce()));
-		if(def.getEtatActuel().getAgilite() < etatActuel.getAgilite()){
-      def.getEtatActuel().setVitalite(def.getEtatActuel().getVitalite() - Math.max(1, n));
+    int n = Util.random(1, Math.max(1, etatActuel.getForce() - def.getEtatActuel().getForce()));
+    if(def.getEtatActuel().getAgilite() < etatActuel.getAgilite()){
+      def.getEtatActuel().setVitalite(def.getEtatActuel().getVitalite() - n);
     }else{
-      def.getEtatActuel().setVitalite(def.getEtatActuel().getVitalite() - Math.max(1, (n/2)));
+      def.getEtatActuel().setVitalite(def.getEtatActuel().getVitalite() - (n/2));
       def.getEtatActuel().setAgilite(def.getEtatActuel().getAgilite()/3);
     }
   }
 
   public void lutteIter(Personnage def){
-    boolean p = true; // Variable qui permet de savoir qui doit attaquer
+    boolean p = true;
     while(estVivant() && def.estVivant()){
-      System.out.println(this);
-      System.out.println(def);
+      System.out.println(nom + ": " + etatActuel);
+      System.out.println(def.nom + ": " + def.etatActuel);
       if(p){
         attaque(def);
         p = !p;
@@ -50,15 +43,4 @@ class Personnage{
     }
     System.out.println("Le combat est fini");
   }
-
-	public void lutteRec(Personnage def){
-		if(!estVivant() || !def.estVivant()){
-			System.out.println("Le combat est fini");
-		}else{
-			attaque(def);
-			System.out.println(this);
-			System.out.println(def);
-			def.lutteRec(this);
-		}
-	}
 }
