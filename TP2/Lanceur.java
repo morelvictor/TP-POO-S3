@@ -1,21 +1,17 @@
-import java.util.Scanner;
 
 class Lanceur{
 	
 	public static void main(String[] args){
-		Scanner scanner = new Scanner(System.in);
-		while(true){
-			System.out.println("Voulez-vous jouer une partie (y/n)");
-			char answer = scanner.next().charAt(0);
-			if(answer == 'y'){
-				menu();
-			}else if(answer == 'n'){
-				return;
-			}
+		Joueur j = new Joueur();
+		j.setNom(j.demanderNom());
+		while(j.veutJouer()){
+			int[] dim = j.demanderDimensions();
+			int nbMines = j.demanderNbMines();
+			Plateau p = new Plateau(dim[1], dim[0], nbMines);
+			Jeu jeu = new Jeu(j, p);
+			jeu.jouer();
 		}
+		j.finir();
 	}
 
-	public static void menu(){
-		
-	}
 }
