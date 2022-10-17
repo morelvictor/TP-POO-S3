@@ -15,6 +15,7 @@ class Formateur{
 			Scanner sc2 = new Scanner(sc.next());
 			while(sc2.hasNext()){
 				ligne.addChaine(new ChaineCar(sc2.next()));
+				// acc.addChaine(new ChaineCar(sc2.next()));
 			}
 			acc.addLigne(ligne);
 		}

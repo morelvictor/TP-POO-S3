@@ -5,4 +5,8 @@ class FormateurJoli extends Formateur{
 		super(filename);
 		this.maxLength = ml;
 	}
+
+	public void readParagraphe(){
+		
+	}
 }
