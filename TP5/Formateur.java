@@ -41,6 +41,7 @@ class Formateur{
 		sc = null;
 		try{
 			sc = new Scanner(new File(filename));
+			sc.useDelimiter("\n\n");
 		}
 		catch(Exception e){
 			System.out.println("Erreur lors de l'ouverture du fichier:");
