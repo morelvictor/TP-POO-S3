@@ -7,6 +7,10 @@ class Espace extends ChaineCar{
 		size = s;
 	}
 
+	public Espace(){
+		size = 1;
+	}
+
 	public int len(){
 		return size;
 	}

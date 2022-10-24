@@ -1,18 +1,19 @@
 class ChaineCar{
-	
-	String s = "";
-	
-	public ChaineCar(){}
-
-	public ChaineCar(String s){
-		this.s = s;
-	}
+	String texte;
 
 	public int len(){
-		return s.length();
+		return texte.length();
 	}
 
 	public String toString(){
-		return s;
+		return texte;
+	}
+
+	public ChaineCar(){
+		texte = "";
+	}
+
+	public ChaineCar(String t){
+		texte = t;
 	}
 }

@@ -1,0 +1,13 @@
+Figure
+	Rectangle
+		- int longueur
+		- int largeur
+		Carre
+			-int longueur
+	Ellipse
+		- int rayon1
+		- int rayon2
+		Cercle
+			- int rayon
+	Triangle
+		

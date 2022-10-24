@@ -25,8 +25,6 @@ class Ligne extends ChaineCar{
 		String acc = "";
 		for(ChaineCar c : l){
 			acc += c.toString();
-			if(c != l.getLast())
-				acc += " ";
 		}
 		return acc;
 	}

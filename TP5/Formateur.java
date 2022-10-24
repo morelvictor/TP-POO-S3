@@ -8,22 +8,18 @@ class Formateur{
 	Scanner sc;
 	
 	private Paragraphe readParagraphe(){
-		Paragraphe acc = new Paragraphe();
-		sc.useDelimiter("\n");
-		while(sc.hasNext()){
-			Ligne ligne = new Ligne();
-			Scanner sc2 = new Scanner(sc.next());
-			while(sc2.hasNext()){
-				ligne.addChaine(new ChaineCar(sc2.next()));
-				// acc.addChaine(new ChaineCar(sc2.next()));
-			}
-			acc.addLigne(ligne);
+		Paragraphe p = new Paragraphe();
+		String para = sc.next();
+		Scanner s = new Scanner(para);
+		while(s.hasNext()){
+			p.addChaine(new ChaineCar(s.next()));
+			p.addChaine(new Espace());
 		}
-		sc.useDelimiter(Pattern.compile("\\s"));
-		return acc;
+		return p;
 	}
 
 	public void read(){
+		sc.useDelimiter("\n\\s*\n");
 		while(sc.hasNext()){
 			texte.add(readParagraphe());
 		}
