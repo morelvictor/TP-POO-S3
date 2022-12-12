@@ -2,6 +2,7 @@
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Collection;
+import java.lang.reflect.Array;
 
 class TabSet<E> implements Set<E> {
 	E[] tab;
@@ -37,9 +38,14 @@ class TabSet<E> implements Set<E> {
 		return new TabIter();
 	}
 
-	@SuppressWarnings("unckecked")
+	@SuppressWarnings("unchecked")
 	public TabSet(int n) {
 		tab = (E[]) new Object[n];
+	}
+
+	@SuppressWarnings("unchecked")
+	public TabSet() {
+		tab = (E[]) new Object[1];
 	}
 
 	public boolean contains(Object o) {
@@ -71,9 +77,9 @@ class TabSet<E> implements Set<E> {
 			System.out.println("L'élément est déjà contenu dans l'ensemble");
 			return false;
 		}
-		if (size() == tab.length) {
-			System.out.println("Il n'y a plus de place dans l'ensemble");
-			return false;
+		if (size() >= tab.length) {
+			E[] t = (E[]) new Object[tab.length * 2];
+			tab = toArray(t);
 		}
 		for (int i = 0; i < tab.length; i++) {
 			if (tab[i] == null) {
@@ -110,6 +116,7 @@ class TabSet<E> implements Set<E> {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean addAll(Collection<? extends E> c) {
 		Iterator<?> it = c.iterator();
 		boolean acc = true;
@@ -151,15 +158,25 @@ class TabSet<E> implements Set<E> {
 		return acc;
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T> T[] toArray(T[] a) {
-		if (a.length >= size()) {
-			int i = 0;
-			for (E e : this) {
-				a[i] = (T) e;
-				i += 1;
-			}
+		T[] t;
+		if (a.length > size())
+			t = a;
+		else {
+			Class<?> c = a.getClass().getComponentType();
+			t = (T[]) Array.newInstance(c, size());
 		}
-		return a;
+		int i = 0;
+		for (E e : this) {
+			t[i] = (T) e;
+			i++;
+		}
+		while (i < t.length) {
+			t[i] = null;
+			i++;
+		}
+		return t;
 	}
 
 	public String toString() {
