@@ -8,11 +8,14 @@ public class Cadre extends JFrame{
 
 	class Carre extends JPanel implements MouseInputListener{
 		boolean moving = false;
-
 		public Carre(){
+
+
 			super();
 			setBounds(100, 200, 50, 50);
 			setBackground(Color.blue);
+			addMouseListener(this);
+			addMouseMotionListener(this);
 		}
 
 		public void mouseExited(MouseEvent e){}
@@ -24,12 +27,12 @@ public class Cadre extends JFrame{
 			System.out.println("Changement d'état, moving = " + moving);
 		}
 		public void mouseMoved(MouseEvent e){
-			System.out.println("Moved");
-			this.setLocation(getX() + e.getX(), getY() + e.getY());
+			if(moving)
+				this.setLocation(getX() + (e.getX() - getWidth()/2), getY() + (e.getY() - getHeight() / 2));
 		}
 		public void mouseDragged(MouseEvent e){}
 	}
-
+	
 	JPanel container;
 
 	public Cadre(){
@@ -38,7 +41,6 @@ public class Cadre extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		container = new JPanel( null );
 		Carre carre = new Carre();
-		carre.addMouseListener(carre);
 		container.add(carre);
 		this.add(container);
 	}
